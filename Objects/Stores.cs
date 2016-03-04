@@ -188,6 +188,41 @@ namespace ShoeStores.Objects
       }
       return allBrands;
     }//end GetBrands method
+///////////////////////////   Update   ////////////////////////////////////////
+    public void Update(string newName)
+    {
+      //update the name in the object
+      this.SetName(newName);
+
+      //name and open the db connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      //create the query parameters
+      SqlParameter name = new SqlParameter();
+      name.ParameterName = "@name";
+      name.Value = newName;
+
+      SqlParameter id = new SqlParameter();
+      id.ParameterName = "@id";
+      id.Value = this.GetId();
+
+      //create the sql command
+      SqlCommand cmd = new SqlCommand("UPDATE stores SET name = @name WHERE id = @id;", conn);
+
+      //add the query parameters to the command
+      cmd.Parameters.Add(name);
+      cmd.Parameters.Add(id);
+
+      //execute the command
+      cmd.ExecuteNonQuery();
+
+      // close the connection
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 ///////////////////////////   Delete   ////////////////////////////////////////
     public void Delete()
     {

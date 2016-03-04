@@ -51,7 +51,7 @@ namespace ShoeStores
       Assert.Equal(dummy, Store.Find("JC Penny"));
     }
     [Fact]//5
-    public void GetBrands_Test()
+    public void GetBrands_And_Stock_Test()
     {
       Store footLocker = new Store("Foot Locker");
       footLocker.Save();
@@ -67,6 +67,20 @@ namespace ShoeStores
       Assert.Equal(compareList, resultList);
     }
     [Fact]//6
+    public void Update_Store()
+    {
+      Store footLocker = new Store("footLocker");
+      footLocker.Save();
+      int footLockerId = footLocker.GetId();
+      string beforeName = Store.Find(footLockerId).GetName();
+
+      footLocker.Update("Foot Locker");
+      string afterName = Store.Find(footLockerId).GetName();
+
+      Assert.Equal(beforeName, "footLocker");
+      Assert.Equal(afterName, "Foot Locker");
+    }
+    [Fact]//7
     public void Delete_Store()
     {
       Store dummy1 = new Store("Nordstrom Rack");

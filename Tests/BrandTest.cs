@@ -50,7 +50,7 @@ namespace ShoeStores
       Assert.Equal(dummy, Brand.Find("Under Armor"));
     }
     [Fact]//5
-    public void GetStores_Test()
+    public void GetStores_And_Stock_Test()
     {
       Store nordstrom = new Store("Nordstrom");
       nordstrom.Save();
@@ -67,6 +67,20 @@ namespace ShoeStores
       Assert.Equal(compareList, resultList);
     }
     [Fact]//6
+    public void Update_Brand()
+    {
+      Brand nike = new Brand("nike");
+      nike.Save();
+      int nikeId = nike.GetId();
+      string beforeName = Brand.Find(nikeId).GetName();
+
+      nike.Update("Nike");
+      string afterName = Brand.Find(nikeId).GetName();
+
+      Assert.Equal(beforeName, "nike");
+      Assert.Equal(afterName, "Nike");
+    }
+    [Fact]//7
     public void Delete_Brand()
     {
       Brand dummy1 = new Brand("Old Balance");
