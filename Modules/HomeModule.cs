@@ -26,6 +26,18 @@ namespace ShoeStores
         ModelObject model = new ModelObject();
         return View["index.cshtml", model];
       };
+      Post["/store/empty"] = _ =>
+      {
+        Store.DeleteAll();
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
+      };
+      Get["/brand/empty"] = _ =>
+      {
+        Brand.DeleteAll();
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
+      };
     }
   }
 }
