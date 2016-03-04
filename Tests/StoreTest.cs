@@ -33,6 +33,37 @@ namespace ShoeStores
       Assert.Equal(beforeList.Count, 0);
       Assert.Equal(afterList.Count, 1);
     }
+    [Fact]//3
+    public void FindByInt_Store()
+    {
+      Store dummy = new Store("JC Penny");
+      dummy.Save();
+      int searchInt = dummy.GetId();
+
+      Assert.Equal(dummy, Store.Find(searchInt));
+    }
+    [Fact]//4
+    public void FindByString_Store()
+    {
+      Store dummy = new Store("JC Penny");
+      dummy.Save();
+
+      Assert.Equal(dummy, Store.Find("JC Penny"));
+    }
+    [Fact]//6
+    public void Delete_Store()
+    {
+      Store dummy1 = new Store("Nordstrom Rack");
+      dummy1.Save();
+      Store dummy2 = new Store("Nordstrom");
+      dummy2.Save();
+      List<Store> beforeList = Store.GetAll();
+      dummy1.Delete();
+      List<Store> afterList = Store.GetAll();
+
+      Assert.Equal(2, beforeList.Count);
+      Assert.Equal(new List<Store>{dummy2}, afterList);
+    }
     public void Dispose()
     {
       Brand.DeleteAll();

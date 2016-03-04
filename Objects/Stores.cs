@@ -81,7 +81,7 @@ namespace ShoeStores.Objects
       {
         conn.Close();
       }
-    }// end Save method
+    }//end Save method
 /////////////////////////////   Read   ///////////////////////////////////////
     public static List<Store> GetAll()
     {
@@ -110,8 +110,60 @@ namespace ShoeStores.Objects
         conn.Close();
       }
       return allStores;
-    }// end GetAll method
+    }//end GetAll method
+    public static Store Find(int id)
+    {
+      List<Store> allStores = Store.GetAll();
+
+      foreach(Store item in allStores)
+      {
+        if(item.GetId() == id)
+        {
+          return item;
+        }
+      }
+      throw new System.ArgumentException("Parameter returns no value", "id");
+    }//end Find(int) method
+    public static Store Find(string name)
+    {
+      List<Store> allStores = Store.GetAll();
+
+      foreach(Store item in allStores)
+      {
+        if(item.GetName() == name)
+        {
+          return item;
+        }
+      }
+      throw new System.ArgumentException("Parameter returns no value", "id");
+    }//end Find(string) method
 ///////////////////////////   Delete   ////////////////////////////////////////
+    public void Delete()
+    {
+      //name and open the db connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      //create the query parameters
+      SqlParameter id = new SqlParameter();
+      id.ParameterName = "@id";
+      id.Value = this.GetId();
+
+      //create the sql command
+      SqlCommand cmd = new SqlCommand("DELETE FROM stores WHERE id=@id; DELETE FROM stores_brands WHERE store_id=@id", conn);
+
+      //add the query parameters to the command
+      cmd.Parameters.Add(id);
+
+      //execute the command
+      cmd.ExecuteNonQuery();
+
+      //close the connection
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }//end Delete method
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

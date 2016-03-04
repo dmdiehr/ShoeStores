@@ -32,6 +32,37 @@ namespace ShoeStores
       Assert.Equal(beforeList.Count, 0);
       Assert.Equal(afterList.Count, 1);
     }
+    [Fact]//3
+    public void FindByInt_Brand()
+    {
+      Brand dummy = new Brand("Under Armor");
+      dummy.Save();
+      int searchInt = dummy.GetId();
+
+      Assert.Equal(dummy, Brand.Find(searchInt));
+    }
+    [Fact]//4
+    public void FindByString_Brand()
+    {
+      Brand dummy = new Brand("Under Armor");
+      dummy.Save();
+
+      Assert.Equal(dummy, Brand.Find("Under Armor"));
+    }
+    [Fact]//6
+    public void Delete_Brand()
+    {
+      Brand dummy1 = new Brand("Old Balance");
+      dummy1.Save();
+      Brand dummy2 = new Brand("New Balance");
+      dummy2.Save();
+      List<Brand> beforeList = Brand.GetAll();
+      dummy1.Delete();
+      List<Brand> afterList = Brand.GetAll();
+
+      Assert.Equal(beforeList.Count, 2);
+      Assert.Equal(afterList, new List<Brand>{dummy2});
+    }
     public void Dispose()
     {
       Brand.DeleteAll();

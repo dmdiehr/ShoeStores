@@ -114,7 +114,59 @@ namespace ShoeStores.Objects
 
       return allBrands;
     }//end GetAll method
+    public static Brand Find(int id)
+    {
+      List<Brand> allBrands = Brand.GetAll();
+
+      foreach(Brand item in allBrands)
+      {
+        if(item.GetId() == id)
+        {
+          return item;
+        }
+      }
+      throw new System.ArgumentException("Parameter returns no value", "id");
+    }//end Find(int) method
+    public static Brand Find(string name)
+    {
+      List<Brand> allBrands = Brand.GetAll();
+
+      foreach(Brand item in allBrands)
+      {
+        if(item.GetName() == name)
+        {
+          return item;
+        }
+      }
+      throw new System.ArgumentException("Parameter returns no value", "id");
+    }//end Find(string method)
 ///////////////////////////   Delete   ////////////////////////////////////////
+    public void Delete()
+    {
+      //name and open the db connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      //create the query parameters
+      SqlParameter id = new SqlParameter();
+      id.ParameterName = "@id";
+      id.Value = this.GetId();
+
+      //create the sql command
+      SqlCommand cmd = new SqlCommand("DELETE FROM brands WHERE id=@id; DELETE FROM stores_brands WHERE brand_id=@id", conn);
+
+      //add the query parameters to the command
+      cmd.Parameters.Add(id);
+
+      //execute the command
+      cmd.ExecuteNonQuery();
+
+      //close the connection
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }//end Delete method
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
