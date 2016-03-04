@@ -12,9 +12,19 @@ namespace ShoeStores
         ModelObject model = new ModelObject();
         return View["index.cshtml", model];
       };
-      Get["/test2"] = _ =>
+      Post["/store/new"] = _ =>
       {
-        return View["test2.cshtml"];
+        Store newStore = new Store(Request.Form["store-name"]);
+        newStore.Save();
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
+      };
+      Post["/brand/new"] = _ =>
+      {
+        Brand newBrand = new Brand(Request.Form["brand-name"]);
+        newBrand.Save();
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
       };
     }
   }

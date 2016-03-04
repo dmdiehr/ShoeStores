@@ -3,10 +3,6 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/content/main.css" media="screen" title="no title" charset="utf-8">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-git2.min.js">
-    </script>
-    <script type="text/javascript" src="/content/js/scripts.js">
-    </script>
     <title>C# Code Review</title>
   </head>
   <body>
@@ -16,30 +12,38 @@
       </header>
       <div class="section" id="stores">
         <h3>Stores</h3>
+        <form action="/store/new" method="post">
+          <input type="text" name="store-name">
+          <button type="submit">Add</button>
+        </form>
         @if (Model.AllStores().Count>0)
         {
           @foreach (var item in Model.AllStores())
           {
-            <span>@item.GetName()</span><br>
+            <p>@item.GetName()</p>
           }
         }
         else
         {
-          <span>No Stores Entered Yet</span>
+          <p>No Stores Entered Yet</p>
         }
       </div>
       <div class="section" id="brands">
         <h3>Brands</h3>
+        <form action="/brand/new" method="post">
+          <input type="text" name="brand-name">
+          <button type="submit">Add</button>
+        </form>
         @if (Model.AllBrands().Count>0)
         {
           @foreach (var item in Model.AllBrands())
           {
-            <span>@item.GetName()</span><br>
+            <p>@item.GetName()</p>
           }
         }
         else
         {
-          <span>No Brands Entered Yet</span>
+          <p>No Brands Entered Yet</p>
         }
       </div>
       <div class="section" id="stock">
