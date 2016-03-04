@@ -222,8 +222,39 @@ namespace ShoeStores.Objects
       {
         conn.Close();
       }
-    }
+    }//end Update method
 ///////////////////////////   Delete   ////////////////////////////////////////
+    public void Unstock(Brand brand)
+    {
+      //name and open the db connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      //create the query parameters
+      SqlParameter storeId = new SqlParameter();
+      storeId.ParameterName = "@store_id";
+      storeId.Value = this.GetId();
+
+      SqlParameter brandId = new SqlParameter();
+      brandId.ParameterName = "@brand_id";
+      brandId.Value = brand.GetId();
+
+      //create the sql command
+      SqlCommand cmd = new SqlCommand("DELETE FROM stores_brands WHERE (brand_id=@brand_id AND store_id=@store_id);", conn);
+
+      //add the query parameters to the command
+      cmd.Parameters.Add(storeId);
+      cmd.Parameters.Add(brandId);
+
+      //execute the command
+      cmd.ExecuteNonQuery();
+
+      //close the connection
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }//end Unstock method
     public void Delete()
     {
       //name and open the db connection

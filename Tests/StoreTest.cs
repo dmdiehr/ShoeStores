@@ -81,6 +81,29 @@ namespace ShoeStores
       Assert.Equal(afterName, "Foot Locker");
     }
     [Fact]//7
+    public void Unstock_Store()
+    {
+      Store fredmeyer = new Store("Fred Meyer");
+      fredmeyer.Save();
+      Store nordstrom = new Store("Nordstrom");
+      nordstrom.Save();
+      Brand kswiss = new Brand("K Swiss");
+      kswiss.Save();
+      fredmeyer.Stock(kswiss);
+      nordstrom.Stock(kswiss);
+
+      List<Store> beforeList = kswiss.GetStores();
+      List<Store> beforeCompare = new List<Store>{fredmeyer, nordstrom};
+
+      fredmeyer.Unstock(kswiss);
+
+      List<Store> afterList = kswiss.GetStores();
+      List<Store> afterCompare = new List<Store>{nordstrom};
+
+      Assert.Equal(beforeList, beforeCompare);
+      Assert.Equal(afterList, afterCompare);
+    }
+    [Fact]//8
     public void Delete_Store()
     {
       Store dummy1 = new Store("Nordstrom Rack");

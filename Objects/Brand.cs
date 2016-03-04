@@ -221,7 +221,7 @@ namespace ShoeStores.Objects
       id.Value = this.GetId();
 
       //create the sql command
-      SqlCommand cmd = new SqlCommand("DELETE FROM brands WHERE id=@id; DELETE FROM stores_brands WHERE brand_id=@id", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM brands WHERE id=@id; DELETE FROM stores_brands WHERE brand_id=@id;", conn);
 
       //add the query parameters to the command
       cmd.Parameters.Add(id);
