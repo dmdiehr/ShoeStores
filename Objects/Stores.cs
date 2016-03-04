@@ -145,19 +145,6 @@ namespace ShoeStores.Objects
       }
       throw new System.ArgumentException("Parameter returns no value", "id");
     }//end Find(int) method
-    public static Store Find(string name)
-    {
-      List<Store> allStores = Store.GetAll();
-
-      foreach(Store item in allStores)
-      {
-        if(item.GetName() == name)
-        {
-          return item;
-        }
-      }
-      throw new System.ArgumentException("Parameter returns no value", "id");
-    }//end Find(string) method
     public List<Brand> GetBrands()
     {
       SqlConnection conn = DB.Connection();

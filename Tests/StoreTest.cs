@@ -42,14 +42,6 @@ namespace ShoeStores
 
       Assert.Equal(dummy, Store.Find(searchInt));
     }
-    [Fact]//4
-    public void FindByString_Store()
-    {
-      Store dummy = new Store("JC Penny");
-      dummy.Save();
-
-      Assert.Equal(dummy, Store.Find("JC Penny"));
-    }
     [Fact]//5
     public void GetBrands_And_Stock_Test()
     {

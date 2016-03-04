@@ -41,14 +41,6 @@ namespace ShoeStores
 
       Assert.Equal(dummy, Brand.Find(searchInt));
     }
-    [Fact]//4
-    public void FindByString_Brand()
-    {
-      Brand dummy = new Brand("Under Armor");
-      dummy.Save();
-
-      Assert.Equal(dummy, Brand.Find("Under Armor"));
-    }
     [Fact]//5
     public void GetStores_And_Stock_Test()
     {
