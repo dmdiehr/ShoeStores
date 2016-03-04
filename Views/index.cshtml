@@ -18,16 +18,20 @@
         </form>
         @if (Model.AllStores().Count>0)
         {
-          @foreach (var item in Model.AllStores())
-          {
-            <p>@item.GetName()</p>
-          }
+          <ul>
+            @foreach (var item in Model.AllStores())
+            {
+              <p class="list">
+                <a href="/store/@item.GetId()">@item.GetName()</a> <span><a href="/store/delete/@item.GetId()"> | DELETE |</a> </span>
+              </p>
+            }
+          </ul>
         }
         else
         {
           <p>No Stores Entered Yet</p>
         }
-        <a href="/store/empty">Delete All</a>
+        <p><a href="/store/empty">Delete All</a></p>
       </div>
       <div class="section" id="brands">
         <h3>Brands</h3>
@@ -37,16 +41,20 @@
         </form>
         @if (Model.AllBrands().Count>0)
         {
-          @foreach (var item in Model.AllBrands())
-          {
-            <p>@item.GetName()</p>
-          }
+          <ul>
+            @foreach (var item in Model.AllBrands())
+            {
+            <p class="list">
+              <a href="/brand/@item.GetId()">@item.GetName()</a> <span><a href="/brand/delete/@item.GetId()"> | DELETE |</a> </span>
+            </p>
+            }
+          </ul>
         }
         else
         {
           <p>No Brands Entered Yet</p>
         }
-        <a href="/brand/empty">Delete All</a>
+        <p><a href="/brand/empty">Delete All</a></p>
       </div>
       <div class="section" id="stock">
         <h3>Update Stock Info</h3>
