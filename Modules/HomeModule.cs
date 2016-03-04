@@ -1,5 +1,5 @@
 using Nancy;
-using Shoes.Objects;
+using ShoeStores.Objects;
 using System.Collections.Generic;
 namespace ShoeStores
 {
@@ -9,7 +9,7 @@ namespace ShoeStores
     {
       Get["/"] = _ =>
       {
-        return View["test1.cshtml", model];
+        return View["test1.cshtml"];
       };
       Get["/test2"] = _ =>
       {
