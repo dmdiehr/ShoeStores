@@ -57,7 +57,33 @@
         <p><a href="/brand/empty">Delete All</a></p>
       </div>
       <div class="section" id="stock">
-        <h3>Update Stock Info</h3>
+        @if(Model.AllBrands().Count>0 && Model.AllStores().Count>0)
+        {
+          <h3>Update Stock Info</h3>
+          <br><br>
+          <form id="update-form" action="/update" method="post">
+            <label for="update-store">Store</label>
+            <select name="update-store">
+              @foreach (var item in Model.AllStores())
+              {
+                <option value="@item.GetId()">@item.GetName()</option>
+              }
+            </select>
+            <label for="update-brand">Brand</label>
+            <select name="update-brand">
+              @foreach (var item in Model.AllBrands())
+              {
+                <option value="@item.GetId()">@item.GetName()</option>
+              }
+            </select>
+            <br><br>
+            <button type="submit">Update</button>
+          </form>
+        }
+        else
+        {
+          <h2>Enter stores and brands before updating inventories.</h2>
+        }
 
       </div>
     </div>

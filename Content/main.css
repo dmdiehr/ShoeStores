@@ -6,9 +6,17 @@ form {
   width:70%;
   margin:auto;
 }
+#update-form {
+  margin-left: 10px;
+  text-align: left;
+  width: 100%;
+}
 
 label {
   width:29%;
+}
+select {
+  margin-right: 20px;
 }
 input {
   width:70%;
@@ -30,7 +38,10 @@ input {
   color:white;
   background: black;
 }
-h1, h2, h3, h4, h5 {
+h1 {
+  font-size: 3em;
+}
+h3 {
   font-size: 2em;
 }
 

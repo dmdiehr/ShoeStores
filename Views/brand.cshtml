@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/content/css/main.css" media="screen" title="no title" charset="utf-8">
+
+    <title>C# Code Review</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="section" id="header">
+        <h1>Stores that stock @Model.GetBrand().GetName()</h1>
+      </header>
+      <ul>
+        @if (Model.GetBrand().GetStores().Count>0)
+        {
+          @foreach(var item in Model.GetBrand().GetStores())
+          {
+            <li>@item.GetName()</a><span><a href="/update/@item.GetId()/@Model.GetBrand().GetId()"> | REMOVE |</a></li>
+          }
+        }
+        else
+        {
+          <p>
+            This brand is not carried anywhere.
+          </p>
+        }
+      </ul>
+      <a href="/">Home</a>
+    </div>
+  </body>
