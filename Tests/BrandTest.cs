@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace ShoeStores
 {
-  public class BrandTest //: IDisposable
+  public class BrandTest : IDisposable
   {
     public BrandTest()
     {
@@ -21,10 +21,21 @@ namespace ShoeStores
 
       Assert.Equal(dummy1, dummy2);
     }
-    // public void Dispose()
-    // {
-    //   Brand.DeleteAll();
-    //   Store.DeleteAll();
-    // }//end teardown
+    [Fact]//2
+    public void SaveDeleteAllGetAllDBStartsEmpty()
+    {
+      Brand dummy = new Brand("Docs");
+      List<Brand> beforeList = Brand.GetAll();
+      dummy.Save();
+      List<Brand> afterList = Brand.GetAll();
+
+      Assert.Equal(beforeList.Count, 0);
+      Assert.Equal(afterList.Count, 1);
+    }
+    public void Dispose()
+    {
+      Brand.DeleteAll();
+      Store.DeleteAll();
+    }//end teardown
   }//end class
 }//end namespace

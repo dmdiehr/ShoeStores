@@ -19,7 +19,7 @@ This is a very simple web app that would allow a user to keep and update a datab
 * _2>GO_
 * _1>CREATE TABLE stores (id INT IDENTITY(1,1), name VARCHAR(255));_
 * _2>CREATE TABLE brands (id INT IDENTITY(1,1), name VARCHAR(255);_
-* _3>CREATE TABLE stores_brands (id INT IDENTITY(1,1), store_id INT, brand_id INT;_
+* _3>CREATE TABLE stores_brands (id INT IDENTITY(1,1), store_id INT, brand_id INT);_
 * _4>GO_
 * _1>Quit_
 * _In the Windows Powershell navigate to the project folder_

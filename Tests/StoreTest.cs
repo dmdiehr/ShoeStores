@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ShoeStores
 {
-  public class StoreTest// : IDisposable
+  public class StoreTest : IDisposable
   {
     public StoreTest()
     {
@@ -22,10 +22,21 @@ namespace ShoeStores
 
       Assert.Equal(dummy1, dummy2);
     }
-    // public void Dispose()
-    // {
-    //   Brand.DeleteAll();
-    //   Store.DeleteAll();
-    // }//end teardown
+    [Fact]//2
+    public void SaveDeleteAllGetAllDBStartsEmpty()
+    {
+      Store dummy = new Store("Macy's");
+      List<Store> beforeList = Store.GetAll();
+      dummy.Save();
+      List<Store> afterList = Store.GetAll();
+
+      Assert.Equal(beforeList.Count, 0);
+      Assert.Equal(afterList.Count, 1);
+    }
+    public void Dispose()
+    {
+      Brand.DeleteAll();
+      Store.DeleteAll();
+    }//end teardown
   }//end class
 }//end namespace
