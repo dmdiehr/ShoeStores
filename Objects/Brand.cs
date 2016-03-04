@@ -140,6 +140,39 @@ namespace ShoeStores.Objects
       }
       throw new System.ArgumentException("Parameter returns no value", "id");
     }//end Find(string method)
+    public List<Store> GetStores()
+    {
+      List<Store> stores = new List<Store> {};
+
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlParameter id = new SqlParameter();
+      id.ParameterName = "@id";
+      id.Value = this.GetId();
+
+      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN stores_brands ON (brands.id = stores_brands.brand_id) JOIN stores ON (stores.id = stores_brands.store_id) WHERE brands.id = @id;", conn);
+
+      cmd.Parameters.Add(id);
+      rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        Store newStore = new Store(rdr.GetString(1), rdr.GetInt32(0));
+        stores.Add(newStore);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return stores;
+    }//end GetStores method
 ///////////////////////////   Delete   ////////////////////////////////////////
     public void Delete()
     {

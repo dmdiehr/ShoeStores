@@ -49,6 +49,23 @@ namespace ShoeStores
 
       Assert.Equal(dummy, Brand.Find("Under Armor"));
     }
+    [Fact]//5
+    public void GetStores_Test()
+    {
+      Store nordstrom = new Store("Nordstrom");
+      nordstrom.Save();
+      Store footLocker = new Store("Foot Locker");
+      footLocker.Save();
+      Brand nike = new Brand("Nike");
+      nike.Save();
+      nordstrom.Stock(nike);
+      footLocker.Stock(nike);
+
+      List<Store> compareList = new List<Store> {nordstrom, footLocker};
+      List<Store> resultList = nike.GetStores();
+
+      Assert.Equal(compareList, resultList);
+    }
     [Fact]//6
     public void Delete_Brand()
     {

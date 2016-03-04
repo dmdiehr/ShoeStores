@@ -42,6 +42,7 @@ namespace ShoeStores.Objects
         return (idEquality && nameEquality);
       }
     }
+////////////////////////////   Create   ///////////////////////////////////
     public void Save()
     {
       //name and open the db connection
@@ -82,6 +83,26 @@ namespace ShoeStores.Objects
         conn.Close();
       }
     }//end Save method
+    public void Stock(Brand newBrand)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlParameter storeId = new SqlParameter();
+      storeId.ParameterName = "@store_id";
+      storeId.Value = this.GetId();
+
+      SqlParameter brandId = new SqlParameter();
+      brandId.ParameterName = "@brand_id";
+      brandId.Value = newBrand.GetId();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@store_id, @brand_id);", conn);
+
+      cmd.Parameters.Add(storeId);
+      cmd.Parameters.Add(brandId);
+
+      cmd.ExecuteNonQuery();
+    }//end Stock method
 /////////////////////////////   Read   ///////////////////////////////////////
     public static List<Store> GetAll()
     {
@@ -137,6 +158,36 @@ namespace ShoeStores.Objects
       }
       throw new System.ArgumentException("Parameter returns no value", "id");
     }//end Find(string) method
+    public List<Brand> GetBrands()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE store_id = @id;", conn);
+      SqlParameter id = new SqlParameter();
+      id.ParameterName = "@id";
+      id.Value = this.GetId();
+      cmd.Parameters.Add(id);
+      rdr = cmd.ExecuteReader();
+
+      List<Brand> allBrands = new List<Brand> {};
+      while (rdr.Read())
+      {
+        Brand newBrand = new Brand(rdr.GetString(1), rdr.GetInt32(0));
+        allBrands.Add(newBrand);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allBrands;
+    }//end GetBrands method
 ///////////////////////////   Delete   ////////////////////////////////////////
     public void Delete()
     {

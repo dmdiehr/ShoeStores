@@ -50,6 +50,22 @@ namespace ShoeStores
 
       Assert.Equal(dummy, Store.Find("JC Penny"));
     }
+    [Fact]//5
+    public void GetBrands_Test()
+    {
+      Store footLocker = new Store("Foot Locker");
+      footLocker.Save();
+
+      Brand nike = new Brand("Nike");
+      nike.Save();
+      footLocker.Stock(nike);
+
+      List<Brand> compareList = new List<Brand> {nike};
+
+      List<Brand> resultList = footLocker.GetBrands();
+
+      Assert.Equal(compareList, resultList);
+    }
     [Fact]//6
     public void Delete_Store()
     {
