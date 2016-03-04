@@ -9,7 +9,8 @@ namespace ShoeStores
     {
       Get["/"] = _ =>
       {
-        return View["test1.cshtml"];
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
       };
       Get["/test2"] = _ =>
       {

@@ -32,3 +32,43 @@ input {
   color:white;
   background: black;
 }
+
+
+.section {
+  border: 2px solid #777;
+  border-radius: 10px;
+  margin: 30px;
+  padding: 20px;
+  width: 400px;
+  min-height: 800px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+#header {
+  width: 61.5%;
+  min-height: 120px;
+  margin-left: 550px;
+  background-color: #ffb347;
+  color: white;
+}
+
+#stores {
+  float: left;
+  margin-left: 550px;
+  background-color: lightblue;
+}
+
+#brands {
+  float: left;
+  background-color: pink;
+}
+
+#stock {
+  float: left;;
+  background-color: lavender;
+}

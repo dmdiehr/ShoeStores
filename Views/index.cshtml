@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/content/main.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-git2.min.js">
+    </script>
+    <script type="text/javascript" src="/content/js/scripts.js">
+    </script>
+    <title>C# Code Review</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="section" id="header">
+        <h1>Shoe Inventory</h1>
+      </header>
+      <div class="section" id="stores">
+        <h3>Stores</h3>
+        @if (Model.AllStores().Count>0)
+        {
+          @foreach (var item in Model.AllStores())
+          {
+            <span>@item.GetName()</span><br>
+          }
+        }
+        else
+        {
+          <span>No Stores Entered Yet</span>
+        }
+      </div>
+      <div class="section" id="brands">
+        <h3>Brands</h3>
+        @if (Model.AllBrands().Count>0)
+        {
+          @foreach (var item in Model.AllBrands())
+          {
+            <span>@item.GetName()</span><br>
+          }
+        }
+        else
+        {
+          <span>No Brands Entered Yet</span>
+        }
+      </div>
+      <div class="section" id="stock">
+        <h3>Update Stock Info</h3>
 
+      </div>
+    </div>
+    <a href="/test2">test2</a>
+  </body>
