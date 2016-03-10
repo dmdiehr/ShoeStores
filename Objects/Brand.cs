@@ -139,7 +139,7 @@ namespace ShoeStores.Objects
       id.ParameterName = "@id";
       id.Value = this.GetId();
 
-      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN stores_brands ON (brands.id = stores_brands.brand_id) JOIN stores ON (stores.id = stores_brands.store_id) WHERE brands.id = @id;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN brands_stores ON (brands.id = brands_stores.brand_id) JOIN stores ON (stores.id = brands_stores.store_id) WHERE brands.id = @id;", conn);
 
       cmd.Parameters.Add(id);
       rdr = cmd.ExecuteReader();
@@ -208,7 +208,7 @@ namespace ShoeStores.Objects
       id.Value = this.GetId();
 
       //create the sql command
-      SqlCommand cmd = new SqlCommand("DELETE FROM brands WHERE id=@id; DELETE FROM stores_brands WHERE brand_id=@id;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM brands WHERE id=@id; DELETE FROM brands_stores WHERE brand_id=@id;", conn);
 
       //add the query parameters to the command
       cmd.Parameters.Add(id);

@@ -10,6 +10,11 @@
     <div class="container">
       <header class="section" id="header">
         <h1>Brands stocked at @Model.GetStore().GetName()</h1>
+        <form action="/edit/@Model.GetStore().GetId()" method="post">
+          <input type="text" name="edit-store">
+          <button type="submit" name="button">Edit Store Name</button>
+        </form>
+
       </header>
       <ul>
         @if (Model.GetStore().GetBrands().Count>0)

@@ -96,7 +96,7 @@ namespace ShoeStores.Objects
       brandId.ParameterName = "@brand_id";
       brandId.Value = newBrand.GetId();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@store_id, @brand_id);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO brands_stores (store_id, brand_id) VALUES (@store_id, @brand_id);", conn);
 
       cmd.Parameters.Add(storeId);
       cmd.Parameters.Add(brandId);
@@ -151,7 +151,7 @@ namespace ShoeStores.Objects
       SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE store_id = @id;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN brands_stores ON (stores.id = brands_stores.store_id) JOIN brands ON (brands_stores.brand_id = brands.id) WHERE store_id = @id;", conn);
       SqlParameter id = new SqlParameter();
       id.ParameterName = "@id";
       id.Value = this.GetId();
@@ -227,7 +227,7 @@ namespace ShoeStores.Objects
       brandId.Value = brand.GetId();
 
       //create the sql command
-      SqlCommand cmd = new SqlCommand("DELETE FROM stores_brands WHERE (brand_id=@brand_id AND store_id=@store_id);", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM brands_stores WHERE (brand_id=@brand_id AND store_id=@store_id);", conn);
 
       //add the query parameters to the command
       cmd.Parameters.Add(storeId);
@@ -254,7 +254,7 @@ namespace ShoeStores.Objects
       id.Value = this.GetId();
 
       //create the sql command
-      SqlCommand cmd = new SqlCommand("DELETE FROM stores WHERE id=@id; DELETE FROM stores_brands WHERE store_id=@id", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM stores WHERE id=@id; DELETE FROM brands_stores WHERE store_id=@id", conn);
 
       //add the query parameters to the command
       cmd.Parameters.Add(id);

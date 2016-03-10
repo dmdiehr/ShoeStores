@@ -81,6 +81,13 @@ namespace ShoeStores
         ModelObject model = new ModelObject();
         return View["index.cshtml", model];
       };
+      Post["/edit/{id}"] = parameters =>
+      {
+        Store thisStore = Store.Find(parameters.id);
+        thisStore.Update(Request.Form["edit-store"]);
+        ModelObject model = new ModelObject();
+        return View["index.cshtml", model];
+      };
     }
   }
 }
